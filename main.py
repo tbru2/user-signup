@@ -22,23 +22,26 @@ def signup():
     verify_password_error = ''
     email_error = ''
 
-    if " " in username:
-        username_error = "Space(s) not allowed."
+    if " " in username or username == '':
+        username_error = "Not a proper username."
         error_check = True
-    if len(username) < 3 or len(username > 20):
+    elif len(username) < 3 or len(username) > 20:
         username_error = "Username is not the proper length."
+        error_check = True
+    if ' ' in password or password == '':
+        password_error = "Not a proper password."
+        password = ''
+        verify_password = ''
         error_check = True
     if password != verify_password:
         verify_password_error = "Passwords don't match."
         password = ''
         verify_password = ''
         error_check = True
-    if ' ' in password:
-        password_error = "Space(s) not allowed."
-        password = ''
-        verify_password = ''
+    if verify_password == '':
+        verify_password_error = "Passwords don't match."
         error_check = True
-    if len(password) < 3 or len(password) > 20:
+    elif len(password) < 3 or len(password) > 20:
         password_error = "Password is not the proper length."
         password = ''
         verify_password = ''
