@@ -33,19 +33,20 @@ def signup():
         password = ''
         verify_password = ''
         error_check = True
-    if password != verify_password:
-        verify_password_error = "Passwords don't match."
-        password = ''
-        verify_password = ''
-        error_check = True
-    if verify_password == '':
-        verify_password_error = "Passwords don't match."
-        error_check = True
     elif len(password) < 3 or len(password) > 20:
         password_error = "Password is not the proper length."
         password = ''
         verify_password = ''
         error_check = True
+    if password != verify_password:
+        verify_password_error = "Passwords don't match."
+        password = ''
+        verify_password = ''
+        error_check = True
+    elif verify_password == '':
+        verify_password_error = "Passwords don't match."
+        error_check = True
+    
     if email != '':
         if email.count('@') != 1:
             email_error = "Not a valid email address."
@@ -56,7 +57,7 @@ def signup():
         if " " in email:
             email_error = "Not a valid email address."
             error_check = True
-        if len(email) < 3 or len(email) > 20:
+        if len(email[0:email.find('@')]) < 3 or len(email[0:email.find('@')]) > 20:
             email_error = "Not a valid email address."
             error_check = True
     if error_check == True:
